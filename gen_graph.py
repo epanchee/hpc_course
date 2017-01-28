@@ -1,3 +1,5 @@
+from __future__ import division
+
 import networkx as nx
 import numpy as np
 
@@ -16,7 +18,7 @@ for arr in [M.data, M.indices, M.indptr]:
 # f.write("%d\n%s\n" % (len(M.indices), " ".join([str(x-1) if x !=0 else str(x) for x in M.indices])))
 # f.write("%d\n%s\n" % (len(M.indptr), " ".join([str(x) for x in M.indptr])))
 	
-print "data %r indices %r indptr %r" % (M.data, M.indices, M.indptr)
+# print "data %r indices %r indptr %r" % (M.data, M.indices, M.indptr)
 
 # checking
 
@@ -59,11 +61,13 @@ for s in V:
 		if w != s:
 			BC[w] = BC[w] + delta[w]
 	
-f = open('btw_result', 'w')
+f = open('btwcheck_py', 'w')
 	
+BC = [str(x/2) for x in BC]
 print BC
+print "NetworkX algorithm:"
 print nx.betweenness_centrality(G, normalized=False)
 
-f.write(str(BC))
-f.write("\n")
-f.write(str(nx.betweenness_centrality(G, normalized=False)))
+f.write(" ".join(BC))
+# f.write("\n")
+# f.write(str(nx.betweenness_centrality(G, normalized=False)))

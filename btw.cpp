@@ -115,7 +115,7 @@ int main(){
 	d = (int*) calloc(rprt_n, sizeof(d[0]));
 	delta = (float*) calloc(rprt_n, sizeof(delta[0]));
 	
-	for(size_t s = 0; s<rprt_n; s++){
+	for(size_t s = 0; s < rprt_n; s++){
 		// empty stack
 		clear(S);
 		// empty predecessors list
@@ -165,7 +165,7 @@ int main(){
 			for(size_t i = 0; i < P[w].number; i++){
 				v = P[w].preds[i];
 				// cout << "v " << v << " delta[v]: " << delta[v] << " sigma[v] " << sigma[v] << " sigma[w] " << sigma[w] << " sigma[v]/sigma[w]: " << sigma[v]/sigma[w] << endl;
-				delta[v] += sigma[v]/sigma[w] * (1 + delta[w]);
+				delta[v] += (float)sigma[v]/(float)sigma[w] * (1 + delta[w]);
 			}
 			if(w != s){
 				BC[w] += delta[w];
@@ -177,8 +177,12 @@ int main(){
 	
 	/* OUTPUT RESULTS */
 	
+	ofstream out;
+	out.open ("btwcheck_cpp");
+	
 	for(size_t i = 0; i < rprt_n; i++){
 		cout << BC[i]/2 << " ";
+		out << BC[i]/2 << " ";
 	}
 	cout << endl;
 	
@@ -195,6 +199,7 @@ int main(){
 	free(my_csr.column_indices);
 	free(my_csr.row_indices);
     f.close();
+	out.close();
 	
 	/* CLEANING */
 	
