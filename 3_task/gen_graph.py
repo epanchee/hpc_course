@@ -63,11 +63,11 @@ for s in V:
 	
 f = open('btwcheck_py', 'w')
 	
-BC = [str(x/2) for x in BC]
+BC = ["%.2f" % (x/2) for x in BC]
 print BC
 print "NetworkX algorithm:"
 print nx.betweenness_centrality(G, normalized=False)
 
 f.write(" ".join(BC))
-# f.write("\n")
-# f.write(str(nx.betweenness_centrality(G, normalized=False)))
+f.write("\n")
+f.write(str(nx.betweenness_centrality(G, normalized=False)))

@@ -4,7 +4,6 @@
 #include <fstream>
 #include <queue>
 #include <stack>
-#include <array>
 using namespace std;
 
 #define NOTHING -1
@@ -155,7 +154,7 @@ int main(){
 		}
 		
 		for(size_t i = 0; i < rprt_n; i++){
-			delta[i] = 0.0;
+			delta[i] = 0;
 		}
 		
 		while(!S.empty()){
@@ -177,12 +176,15 @@ int main(){
 	
 	/* OUTPUT RESULTS */
 	
-	ofstream out;
-	out.open ("btwcheck_cpp");
+	FILE* out;
+	out = fopen ("btwcheck_cpp","w");
 	
-	for(size_t i = 0; i < rprt_n; i++){
-		cout << BC[i]/2 << " ";
-		out << BC[i]/2 << " ";
+	for(size_t i = 0; i < rprt_n - 1; i++){
+		BC[i] /= 2.0;
+		printf("%.1f ", BC[i]);
+		fprintf(out, "%.2f ", BC[i]);
+		// cout << BC[i] << " ";
+		// out << BC[i] << " ";
 	}
 	cout << endl;
 	
@@ -199,7 +201,7 @@ int main(){
 	free(my_csr.column_indices);
 	free(my_csr.row_indices);
     f.close();
-	out.close();
+	fclose(out); 
 	
 	/* CLEANING */
 	
