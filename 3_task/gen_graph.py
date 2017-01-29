@@ -5,7 +5,7 @@ import numpy as np
 
 G = nx.erdos_renyi_graph(30, 0.05)
 # G = nx.Graph()
-# G.add_edges_from([(1,0),(2,0),(3,0),(4,0)])
+# G.add_edges_from([(1,0),(2,0),(3,0),(4,0),(1,5),(5,4)])
 M = nx.to_scipy_sparse_matrix(G)
 
 f = open('csr_graph', 'w')
@@ -47,6 +47,7 @@ for s in V:
 				Q.append(w)
 				d[w] = d[v] + 1
 			if d[w] == d[v] + 1:
+				# print "s %d sigma[w] %d sigma[v] %d" % (s, sigma[w], sigma[v])
 				sigma[w] = sigma[w] + sigma[v]
 				P[w].append(v)
 	
