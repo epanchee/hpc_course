@@ -128,6 +128,7 @@ int main(){
 	#pragma omp parallel for private(S, P, Q, sigma, d, delta, neighbours, v, w, allocated)
 	for(size_t s = 0; s < rprt_n; s++){
 		// #pragma omp critical
+		// cout << omp_get_thread_num() << " " << &S << " " << &Q << endl;
 		// cout << omp_get_thread_num() << " : " << s << endl;
 		if(!allocated){
 			alloc_mem(rprt_n, P, sigma, d, delta);
@@ -208,10 +209,9 @@ int main(){
 	
 	for(size_t i = 0; i < rprt_n - 1; i++){
 		BC[i] /= 2.0;
-		printf("%.1f ", BC[i]);
+		// printf("%.2f ", BC[i]);
 		fprintf(out, "%.2f ", BC[i]);
 	}
-	cout << endl;
 	
 	/* OUTPUT RESULTS */
 	

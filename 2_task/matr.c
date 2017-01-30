@@ -107,21 +107,21 @@ numworkers = numtasks-1;
       // }
 	  
 	  printf("\n");
-	  // start = omp_get_wtime();
-      // for (k=0; k<NCB; k++)
-         // for (i=0; i<NRA; i++)
-         // {
-            // ct[i][k] = 0.0;
-            // for (j=0; j<NCA; j++)
-				// ct[i][k] = ct[i][k] + a[i][j] * b[j][k];
+	  start = omp_get_wtime();
+      for (k=0; k<NCB; k++)
+         for (i=0; i<NRA; i++)
+         {
+            ct[i][k] = 0.0;
+            for (j=0; j<NCA; j++)
+				ct[i][k] = ct[i][k] + a[i][j] * b[j][k];
 
-			// if(c[i][k] != ct[i][k]){
-				// printf("Error! Matrix data is incorrect at %d, %d (c %.5f != ct %.5f)\n", i, k, c[i][k], ct[i][k]);
-				// break;
-			// }
-         // }
-	  // stop = omp_get_wtime();
-	  // printf("Serial: %.5f seconds\n", stop - start);
+			if(c[i][k] != ct[i][k]){
+				printf("Error! Matrix data is incorrect at %d, %d (c %.5f != ct %.5f)\n", i, k, c[i][k], ct[i][k]);
+				break;
+			}
+         }
+	  stop = omp_get_wtime();
+	  printf("Serial: %.5f seconds\n", stop - start);
 	  
       // printf("\n******************************************************\n");
    }
